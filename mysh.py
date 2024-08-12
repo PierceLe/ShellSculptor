@@ -1,5 +1,6 @@
 import signal
 import shlex
+from Exit import Exit
 
 
 # DO NOT REMOVE THIS FUNCTION!
@@ -33,15 +34,15 @@ def main() -> None:
         except KeyboardInterrupt:
             print()
             continue
-        if command.strip() == "exit":
-            print("exit")
-            break
-        print(command)
+        if command == "":
+            continue
         command_argument: list = split_arguments(command)
         if command_argument == []:
             print("mysh: syntax error: unterminated quote")
-        else:
-            print(command_argument)
+        elif command_argument[0] == "exit":
+            exit_command = Exit(command_argument)
+            exit_command.execute()
+                
             
     
 
