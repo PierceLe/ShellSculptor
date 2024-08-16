@@ -4,21 +4,28 @@ import shlex
 from Cd import Cd
 from Exit import Exit
 from Pwd import Pwd
-import os
+from Which import Which
 
 # DO NOT REMOVE THIS FUNCTION!
 # This function is required in order to correctly switch the terminal foreground group to
 # that of a child process.
+
+BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "cd", "var"]
+
+
 def setup_signals() -> None:
     """
     Setup signals required by this program.
     """
     signal.signal(signal.SIGTTOU, signal.SIG_IGN)
 
+
 def split_arguments(command: str) -> list:
     try:
-        command_argument = shlex.split(command)
-        return command_argument
+        s = shlex.shlex(command, posix=True)
+        s.escapedquotes = "'\""
+        s.whitespace_split = True
+        return list(s)
     except ValueError:
         return []
 
@@ -49,10 +56,13 @@ def main() -> None:
         elif command_argument[0] == "cd":
             cd_command = Cd(command_argument)
             cd_command.execute()
-        elif command_argument[0] == "mkdir":
-            pass
+        # elif command_argument[0] == "var":
+        #     var_command = Variable(command_argument)
+        #     var_command.execute()
+        elif command_argument[0] == "which":
+            which_command = Which(BUILTIN_COMMANDS, command_argument)
+            which_command.execute()
 
 
 if __name__ == "__main__":
     main()
-
