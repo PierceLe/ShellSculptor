@@ -28,7 +28,3 @@ class Var(Command):
                 os.environ["{self._argument[2]}"] = self._argument[3]
             else:
                 print(f"var: expected 2 arguments, got {len(self._argument) - 1}")
-        else:
-            print(
-                f"var: invalid characters for variable {self._argument[1]}, file=sys.stderr"
-            )
