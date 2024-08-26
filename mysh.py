@@ -1,5 +1,6 @@
 import signal
 import shlex
+import os
 
 from Cd import Cd
 from Exit import Exit
@@ -62,6 +63,21 @@ def main() -> None:
         elif command_argument[0] == "which":
             which_command = Which(BUILTIN_COMMANDS, command_argument)
             which_command.execute()
+        else:
+            rside, wside = os.pipe()
+            if not os.fork():
+                os.close(rside)
+                os.dup2(wside, 1)
+                which_command: Which = Which(BUILTIN_COMMANDS, command_argument)
+                which_command.execute
+                os.execve("/bin/bash",["/bin/bash", "-c", command], os.environ)
+            os.close(wside)
+            pyrside = os.fdopen(rside)
+            lines = pyrside.readlines()
+            for line in lines:
+                print(line, end = '')
+            pid, status = os.waitpid(-1, 0)
+
 
 
 if __name__ == "__main__":
