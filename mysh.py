@@ -7,6 +7,7 @@ from Exit import Exit
 from Pwd import Pwd
 from Which import Which
 from Var import Var
+
 # DO NOT REMOVE THIS FUNCTION!
 # This function is required in order to correctly switch the terminal foreground group to
 # that of a child process.
@@ -70,13 +71,12 @@ def main() -> None:
                 os.dup2(wside, 1)
                 which_command: Which = Which(BUILTIN_COMMANDS, command_argument)
                 which_command.execute
-                os.execve("/bin/bash",["/bin/bash", "-c", command], os.environ)
+                os.execve("/bin/bash", ["/bin/bash", "-c", command], os.environ)
             os.close(wside)
             pyrside = os.fdopen(rside)
             lines = pyrside.readlines()
             for line in lines:
-                print(line, end = '')
-            pid, status = os.waitpid(-1, 0)
+                print(line, end="")
 
 
 if __name__ == "__main__":
