@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 import re
 
-
 class Command(ABC):
     def __init__(self, argument: list):
         self._argument = argument

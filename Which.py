@@ -7,9 +7,15 @@ class Which(Command):
     def __init__(self, build_in_commands: list, argument: list):
         super().__init__(argument)
         self.build_in_commands = build_in_commands
+        
+    def is_built_in_command(self, command: str):
+        if command in self.build_in_commands:
+            return True
+        return False
+    
 
     def execute_file(self, command: str):
-        if command in self.build_in_commands:
+        if self.is_built_in_command(command):
             return f"{command}: shell built-in command"
         paths = os.getenv('PATH', os.defpath).split(os.pathsep)
         for path in paths:

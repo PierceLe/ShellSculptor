@@ -1,6 +1,9 @@
 import signal
 import shlex
 import os
+import json
+import re
+import sys
 
 from Cd import Cd
 from Exit import Exit
@@ -27,14 +30,49 @@ def split_arguments(command: str) -> list:
         s = shlex.shlex(command, posix=True)
         s.escapedquotes = "'\""
         s.whitespace_split = True
+        # new_list = [item.replace("'", '"') for item in list(s)]
+        # print(new_list)
         return list(s)
     except ValueError:
         return []
+    
+
+def valid_variable_name(variable_name: str) -> bool:
+        pattern = r'^[A-Za-z0-9_]+$'
+        return bool(re.match(pattern, variable_name))
+    
+    
+
+def load_config_file():
+    myshdotdir = os.environ.get("MYSHDOTDIR")
+    if myshdotdir:
+        myshrc_path = os.path.join(myshdotdir, ".myshrc")
+    else:
+        home_dir = os.path.expanduser("~")
+        myshrc_path = os.path.join(home_dir, ".myshrc")
+    if not os.path.exists(myshrc_path):
+        return
+    try:
+        with open(myshrc_path, "r") as file:
+            env_variables = json.load(file)
+    except json.JSONDecodeError:
+        print("mysh: invalid JSON format for .myshrc", file=sys.stderr)
+        return
+
+    for key, value in env_variables.items():
+        if not isinstance(value, str):
+            print(f"mysh: .myshrc: {key}: not a string", file=sys.stderr)
+            continue
+        elif not valid_variable_name(key):
+            print(f"mysh: .myshrc: {key}: invalid characters for variable name", file=sys.stderr)
+            continue
+        os.environ[key] = os.path.expandvars(value)
 
 
 def main() -> None:
     # DO NOT REMOVE THIS FUNCTION CALL!
     setup_signals()
+    load_config_file()
     while True:
         try:
             command = input(">> ")
@@ -69,8 +107,6 @@ def main() -> None:
             if not os.fork():
                 os.close(rside)
                 os.dup2(wside, 1)
-                which_command: Which = Which(BUILTIN_COMMANDS, command_argument)
-                which_command.execute
                 os.execve("/bin/bash", ["/bin/bash", "-c", command], os.environ)
             os.close(wside)
             pyrside = os.fdopen(rside)
