@@ -2,7 +2,7 @@ import os
 import sys
 from Command import Command
 
-BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "cd", "var", "which"]
+BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "var", "which"]
 
 
 class Which(Command):

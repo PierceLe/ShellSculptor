@@ -58,7 +58,7 @@ def main() -> None:
             which_command = Which(command_argument)
             which_command.execute()
         else:
-            execute_command = ExecuteCommand(command)
+            execute_command = ExecuteCommand(command, command_argument)
             execute_command.execute()
 
 

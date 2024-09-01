@@ -1,13 +1,15 @@
 import sys
 import os
 from Which import Which
+from Command import Command
 from parsing import split_by_pipe_op
 from parsing import solving_shell_variable
 from parsing import split_arguments
 
 
-class ExecuteCommand:
-    def __init__(self, command: str):
+class ExecuteCommand(Command):
+    def __init__(self, command: str, argument: list):
+        super().__init__(argument)
         self.command = command
 
     def execute(self):
