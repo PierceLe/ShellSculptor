@@ -3,6 +3,7 @@ import os
 import parsing
 from Command import Command
 
+
 class Cd(Command):
     def execute(self):
         argument: list = parsing.split_arguments(self._command)
