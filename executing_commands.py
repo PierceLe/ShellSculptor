@@ -56,7 +56,6 @@ class ExecuteCommand(Command):
                     if not os.access(executable_command, os.X_OK):
                         print(f"mysh: permission denied: {executable_command}", file=sys.stderr)
                         sys.exit()
-                    # If the command is a file and is executable, set executable_path to the command itself
                     executable_path = executable_command
                 else:
                     which_command = Which(f"which {executable_command}")
@@ -65,7 +64,10 @@ class ExecuteCommand(Command):
                         print(f"mysh: command not found: {executable_command}", file=sys.stderr)
                         sys.exit()
                     if not executable_path:
-                        print(f"mysh: no such file or directory: {command_argument[0]}", file=sys.stderr)
+                        print(
+                            f"mysh: no such file or directory: {command_argument[0]}",
+                            file=sys.stderr
+                        )
                         sys.exit()
 
                 os.execve(executable_path, command_argument, os.environ)

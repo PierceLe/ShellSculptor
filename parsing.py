@@ -105,7 +105,10 @@ def solving_shell_variable(command: str) -> Union[bool, str]:
         if full_match.startswith('\\$'):
             return full_match[1:]
         if not validate.valid_variable_name(variable_name):
-            print(f"mysh: syntax error: invalid characters for variable {variable_name}", file=sys.stderr)
+            print(
+                f"mysh: syntax error: invalid characters for variable {variable_name}",
+                file=sys.stderr
+            )
             error_occurred = True
             return ""
         return os.environ.get(variable_name, "")
