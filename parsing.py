@@ -2,7 +2,12 @@
 Module to handle parsing for the shell.
 """
 import re
+import shlex
+from typing import Union
 
+import Verify
+import os
+import sys
 
 # You are free to add functions or modify this module as you please.
 
@@ -86,3 +91,37 @@ def split_by_pipe_op(cmd_str: str) -> list[str]:
     # Return string list
     return split_str
 
+
+def solving_shell_variable(command: str) -> Union[bool, str]:
+    pattern_detect_variable = r"\\?\$\{(.*?)\}"
+
+    # Variable to check if a syntax error occurs
+    error_occurred = False
+
+    def get_variable_value(match):
+        nonlocal error_occurred
+        full_match = match.group(0)
+        variable_name = match.group(1)
+        if full_match.startswith('\\$'):
+            return full_match[1:]
+        if not Verify.valid_variable_name(variable_name):
+            print(f"mysh: syntax error: invalid characters for variable {variable_name}", file=sys.stderr)
+            error_occurred = True
+            return ""
+        return os.environ.get(variable_name, "")
+
+    result = re.sub(pattern_detect_variable, get_variable_value, command)
+
+    if error_occurred:
+        return False
+    return result
+
+
+def split_arguments(command: str) -> list:
+    try:
+        s = shlex.shlex(command, posix=True)
+        s.escapedquotes = "'\""
+        s.whitespace_split = True
+        return [os.path.expanduser(arg) for arg in list(s)]
+    except ValueError:
+        return []

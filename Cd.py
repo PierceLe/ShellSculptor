@@ -2,6 +2,7 @@ import sys
 import os
 from Command import Command
 
+
 class Cd(Command):
     def execute(self):
         if len(self._argument) == 1:
@@ -25,4 +26,3 @@ class Cd(Command):
             print(f"cd: no such file or directory: {path}", file=sys.stderr)
         except NotADirectoryError:
             print(f"cd: not a directory: {path}", file=sys.stderr)
-        

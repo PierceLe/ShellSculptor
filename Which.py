@@ -4,6 +4,7 @@ from Command import Command
 
 BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "cd", "var", "which"]
 
+
 class Which(Command):
     def __init__(self, argument: list):
         super().__init__(argument)
