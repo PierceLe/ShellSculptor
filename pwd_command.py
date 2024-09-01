@@ -1,7 +1,7 @@
 import os
 import sys
-from Command import Command
-import Verify
+from mysh_command import Command
+import validate
 import parsing
 
 
@@ -18,7 +18,7 @@ class Pwd(Command):
                     print(os.getcwd())
                     # execute command pwd -P
                 else:
-                    print(f"pwd: invalid option: -{Verify.invalid_option_pwd(options)}")
+                    print(f"pwd: invalid option: -{validate.invalid_option_pwd(options)}")
             else:
                 print("pwd: not expecting any arguments", file=sys.stderr)
         elif len(argument) > 2:

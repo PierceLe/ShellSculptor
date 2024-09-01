@@ -16,8 +16,7 @@ def valid_exit_code(exit_code) -> bool:
         int(exit_code)
     except ValueError:
         return False
-    else:
-        return True
+    return True
 
 
 def invalid_option_pwd(options: list) -> str:

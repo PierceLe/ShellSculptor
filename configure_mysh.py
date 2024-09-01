@@ -1,8 +1,8 @@
 import os
 import json
 import sys
-import Verify
-from parsing import solving_shell_variable
+import validate
+import parsing
 
 
 def load_config_file():
@@ -20,7 +20,7 @@ def load_config_file():
         return
 
     try:
-        with open(myshrc_path, "r") as file:
+        with open(myshrc_path, "r", encoding="utf-8") as file:
             env_variables = json.load(file)
     except json.JSONDecodeError:
         print("mysh: invalid JSON format for .myshrc", file=sys.stderr)
@@ -30,7 +30,7 @@ def load_config_file():
         if not isinstance(value, str):
             print(f"mysh: .myshrc: {key}: not a string", file=sys.stderr)
             continue
-        elif not Verify.valid_variable_name(key):
+        if not validate.valid_variable_name(key):
             print(f"mysh: .myshrc: {key}: invalid characters for variable name", file=sys.stderr)
             continue
-        os.environ[key] = solving_shell_variable(value)
+        os.environ[key] = parsing.solving_shell_variable(value)

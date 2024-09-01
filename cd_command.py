@@ -1,7 +1,7 @@
 import sys
 import os
 import parsing
-from Command import Command
+from mysh_command import Command
 
 
 class Cd(Command):

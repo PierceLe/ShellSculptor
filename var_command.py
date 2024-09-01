@@ -1,8 +1,8 @@
 import os
 import sys
-from Command import Command
-import Verify
-from ExecuteCommand import ExecuteCommand
+from mysh_command import Command
+import validate
+from executing_commands import ExecuteCommand
 import parsing
 
 
@@ -15,7 +15,7 @@ def execute_command_and_capture_output(command: str) -> str:
         os.close(rside)
         os.dup2(wside, 1)
         execute_command.execute()
-        exit(0)
+        sys.exit(0)
 
     os.close(wside)
     pyrside = os.fdopen(rside)
@@ -33,7 +33,7 @@ class Var(Command):
             print(f"var: expected 2 arguments, got {len(argument) - 1}")
             return
 
-        if Verify.is_flag(argument[1]):
+        if validate.is_flag(argument[1]):
             if argument[1] != "-s":
                 print(f"var: invalid option: {argument[1][: 2]}")
                 return
@@ -41,14 +41,14 @@ class Var(Command):
             variable_name = parsing.solving_shell_variable(argument[2])
             if not variable_name:
                 return
-            if not Verify.valid_variable_name(variable_name):
+            if not validate.valid_variable_name(variable_name):
                 print(f"var: invalid characters for variable {argument[2]}", file=sys.stderr)
                 return
             command_to_execute = argument[3]
             output = execute_command_and_capture_output(command_to_execute)
             os.environ[variable_name] = parsing.solving_shell_variable(output)
 
-        elif Verify.valid_variable_name(argument[1]):
+        elif validate.valid_variable_name(argument[1]):
             if len(argument) == 3:
                 os.environ[argument[1]] = parsing.solving_shell_variable((argument[2]))
             else:

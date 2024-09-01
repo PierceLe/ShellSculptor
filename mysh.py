@@ -1,14 +1,10 @@
 import signal
 import os
 
-from Cd import Cd
-from Exit import Exit
-from Pwd import Pwd
-from Which import Which
-from Var import Var
-from ExecuteCommand import ExecuteCommand
+from mysh_command import Command
 from configure_mysh import load_config_file
 from parsing import split_arguments
+from choose_command import command_factory
 
 
 # DO NOT REMOVE THIS FUNCTION!
@@ -42,24 +38,9 @@ def main() -> None:
         command_argument: list = split_arguments(command)
         if not command_argument:
             print("mysh: syntax error: unterminated quote")
-        elif command_argument[0] == "exit":
-            exit_command = Exit(command)
-            exit_command.execute()
-        elif command_argument[0] == "pwd":
-            pwd_command = Pwd(command)
-            pwd_command.execute()
-        elif command_argument[0] == "cd":
-            cd_command = Cd(command)
-            cd_command.execute()
-        elif command_argument[0] == "var":
-            var_command = Var(command)
-            var_command.execute()
-        elif command_argument[0] == "which":
-            which_command = Which(command)
-            which_command.execute()
-        else:
-            execute_command = ExecuteCommand(command)
-            execute_command.execute()
+
+        command_type: Command = command_factory(command)
+        command_type.execute()
 
 
 if __name__ == "__main__":

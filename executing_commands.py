@@ -1,14 +1,13 @@
 import sys
 import os
-from Which import Which
-from Command import Command
+from which_command import Which
+from mysh_command import Command
 from parsing import split_by_pipe_op
 from parsing import solving_shell_variable
 from parsing import split_arguments
 
 
 class ExecuteCommand(Command):
-    
     def execute(self):
         if not solving_shell_variable(self._command):
             return
@@ -56,7 +55,7 @@ class ExecuteCommand(Command):
                 if os.path.isfile(executable_command):
                     if not os.access(executable_command, os.X_OK):
                         print(f"mysh: permission denied: {executable_command}", file=sys.stderr)
-                        exit()
+                        sys.exit()
                     # If the command is a file and is executable, set executable_path to the command itself
                     executable_path = executable_command
                 else:
@@ -64,10 +63,10 @@ class ExecuteCommand(Command):
                     executable_path = which_command.execute_file(executable_command)
                     if executable_path == f"{executable_command} not found":
                         print(f"mysh: command not found: {executable_command}", file=sys.stderr)
-                        exit()
+                        sys.exit()
                     if not executable_path:
                         print(f"mysh: no such file or directory: {command_argument[0]}", file=sys.stderr)
-                        exit()
+                        sys.exit()
 
                 os.execve(executable_path, command_argument, os.environ)
 

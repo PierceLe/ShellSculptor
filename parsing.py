@@ -1,13 +1,13 @@
 """
 Module to handle parsing for the shell.
 """
+import os
+import sys
 import re
 import shlex
 from typing import Union
+import validate
 
-import Verify
-import os
-import sys
 
 # You are free to add functions or modify this module as you please.
 
@@ -104,8 +104,9 @@ def solving_shell_variable(command: str) -> Union[bool, str]:
         variable_name = match.group(1)
         if full_match.startswith('\\$'):
             return full_match[1:]
-        if not Verify.valid_variable_name(variable_name):
-            print(f"mysh: syntax error: invalid characters for variable {variable_name}", file=sys.stderr)
+        if not validate.valid_variable_name(variable_name):
+            print(f"mysh: syntax error: invalid characters for variable\
+             {variable_name}", file=sys.stderr)
             error_occurred = True
             return ""
         return os.environ.get(variable_name, "")
