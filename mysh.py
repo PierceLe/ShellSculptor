@@ -1,3 +1,17 @@
+"""
+mysh.py
+
+This module serves as the main entry point for the shell program. It handles
+the setup of required signals, loads configuration files, and enters a loop
+to continuously accept and execute user commands.
+
+Functions:
+    - setup_signals(): Sets up necessary signal handling for the shell.
+    - main(): The main function that runs the shell, handling input, parsing,
+      command execution, and signal management.
+"""
+
+
 import signal
 import os
 
@@ -20,7 +34,16 @@ def setup_signals() -> None:
 
 
 def main() -> None:
-    # DO NOT REMOVE THIS FUNCTION CALL!
+    """
+    The main function that runs the shell program.
+
+    This function initializes the shell by setting up signals and loading
+    configuration files. It then enters a loop where it repeatedly prompts
+    the user for input, parses the input, and executes the corresponding command.
+
+    The shell handles various exceptions such as EOF and keyboard interrupts
+    to ensure smooth operation and user experience.
+    """
     setup_signals()
     load_config_file()
     while True:

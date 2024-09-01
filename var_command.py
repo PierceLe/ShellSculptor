@@ -1,3 +1,10 @@
+"""
+var_command.py
+
+This module provides the implementation of the Var command,
+which is used to set and manage environment variables in the shell.
+"""
+
 import os
 import sys
 from mysh_command import Command
@@ -26,7 +33,11 @@ def execute_command_and_capture_output(command: str) -> str:
 
 
 class Var(Command):
-
+    """
+    The Var class provides functionality to set and manage environment
+    variables in the shell. It supports both simple assignment of
+    variables and executing commands to capture their output into a variable.
+    """
     def execute(self):
         argument: list = parsing.split_arguments(self._command)
         if len(argument) not in [3, 4]:

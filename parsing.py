@@ -93,6 +93,20 @@ def split_by_pipe_op(cmd_str: str) -> list[str]:
 
 
 def solving_shell_variable(command: str) -> Union[bool, str]:
+    """
+    Resolves shell variables in a command string.
+
+    This function identifies and substitutes shell variables in the given command
+    string with their corresponding values from the environment. If a variable
+    name is invalid, an error message is printed, and the function returns `False`.
+
+    Args:
+        command (str): The command string containing shell variables to resolve.
+
+    Returns:
+        Union[bool, str]: The command string with resolved variables, or `False`
+        if a syntax error occurred due to invalid variable names.
+    """
     pattern_detect_variable = r"\\?\$\{(.*?)\}"
 
     # Variable to check if a syntax error occurs
@@ -121,6 +135,21 @@ def solving_shell_variable(command: str) -> Union[bool, str]:
 
 
 def split_arguments(command: str) -> list:
+    """
+    Splits a command string into a list of arguments, handling quotes and
+    whitespace appropriately.
+
+    This function uses the `shlex` module to split the input command string
+    into a list of arguments, respecting quoted strings and escaping rules.
+    It also expands user home directories if the argument starts with `~`.
+
+    Args:
+        command (str): The command string to be split into arguments.
+
+    Returns:
+        list: A list of strings representing the split arguments.
+        If a `ValueError` occurs during splitting, an empty list is returned.
+    """
     try:
         s = shlex.shlex(command, posix=True)
         s.escapedquotes = "'\""
