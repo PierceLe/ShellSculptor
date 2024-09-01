@@ -4,6 +4,7 @@ from Exit import Exit
 from Pwd import Pwd
 from Which import Which
 from Var import Var
+from ExecuteCommand import ExecuteCommand
 
 
 def choose_command(command_argument: list) -> Command:
@@ -18,4 +19,4 @@ def choose_command(command_argument: list) -> Command:
     elif command_argument[0] == "which":
         return Which(command_argument)
     else:
-        pass
+        return ExecuteCommand(command_argument)

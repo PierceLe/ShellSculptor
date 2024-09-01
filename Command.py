@@ -2,12 +2,12 @@ from abc import ABC, abstractmethod
 
 
 class Command(ABC):
-    def __init__(self, argument: list):
-        self._argument = argument
+    def __init__(self, command: str):
+        self._command = command
 
     @property
-    def argument(self) -> list:
-        return self._argument
+    def get_command(self) -> str:
+        return self._command
 
     @abstractmethod
     def execute(self) -> None:

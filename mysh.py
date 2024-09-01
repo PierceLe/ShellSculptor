@@ -43,22 +43,22 @@ def main() -> None:
         if not command_argument:
             print("mysh: syntax error: unterminated quote")
         elif command_argument[0] == "exit":
-            exit_command = Exit(command_argument)
+            exit_command = Exit(command)
             exit_command.execute()
         elif command_argument[0] == "pwd":
-            pwd_command = Pwd(command_argument)
+            pwd_command = Pwd(command)
             pwd_command.execute()
         elif command_argument[0] == "cd":
-            cd_command = Cd(command_argument)
+            cd_command = Cd(command)
             cd_command.execute()
         elif command_argument[0] == "var":
-            var_command = Var(command_argument)
+            var_command = Var(command)
             var_command.execute()
         elif command_argument[0] == "which":
-            which_command = Which(command_argument)
+            which_command = Which(command)
             which_command.execute()
         else:
-            execute_command = ExecuteCommand(command, command_argument)
+            execute_command = ExecuteCommand(command)
             execute_command.execute()
 
 

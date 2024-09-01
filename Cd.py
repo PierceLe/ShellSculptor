@@ -1,17 +1,18 @@
 import sys
 import os
+import parsing
 from Command import Command
-
 
 class Cd(Command):
     def execute(self):
-        if len(self._argument) == 1:
+        argument: list = parsing.split_arguments(self._command)
+        if len(argument) == 1:
             path = os.path.expanduser("~")
-        elif len(self._argument) > 2:
+        elif len(argument) > 2:
             print("cd: too many arguments", file=sys.stderr)
             return
         else:
-            path = os.path.expanduser(self._argument[1])
+            path = os.path.expanduser(argument[1])
         try:
             os.chdir(path)
             if os.path.isabs(path):

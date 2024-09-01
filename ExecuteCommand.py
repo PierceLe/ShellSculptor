@@ -8,21 +8,18 @@ from parsing import split_arguments
 
 
 class ExecuteCommand(Command):
-    def __init__(self, command: str, argument: list):
-        super().__init__(argument)
-        self.command = command
-
+    
     def execute(self):
-        if not solving_shell_variable(self.command):
+        if not solving_shell_variable(self._command):
             return
-        if '|' in self.command:
-            commands = split_by_pipe_op(self.command)
+        if '|' in self._command:
+            commands = split_by_pipe_op(self._command)
             for command in commands:
                 if not command.strip():
                     print("mysh: syntax error: expected command after pipe", file=sys.stderr)
                     return None
         else:
-            commands = [self.command]
+            commands = [self._command]
 
         final_command = []
         for command in commands:
@@ -63,7 +60,7 @@ class ExecuteCommand(Command):
                     # If the command is a file and is executable, set executable_path to the command itself
                     executable_path = executable_command
                 else:
-                    which_command = Which(["which", executable_command])
+                    which_command = Which(f"which {executable_command}")
                     executable_path = which_command.execute_file(executable_command)
                     if executable_path == f"{executable_command} not found":
                         print(f"mysh: command not found: {executable_command}", file=sys.stderr)

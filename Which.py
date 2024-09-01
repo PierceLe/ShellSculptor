@@ -1,13 +1,12 @@
 import os
 import sys
+import parsing
 from Command import Command
 
 BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "var", "which"]
 
 
 class Which(Command):
-    def __init__(self, argument: list):
-        super().__init__(argument)
 
     def execute_file(self, command: str):
         if command in BUILTIN_COMMANDS:
@@ -20,7 +19,7 @@ class Which(Command):
         return f"{command} not found"
 
     def execute(self):
-        commands: list = self._argument[1:]
+        commands: list = parsing.split_arguments(self._command)[1:]
         if len(commands) == 0:
             print(f"usage: which command ...", file=sys.stderr)
         for command in commands:
