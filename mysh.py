@@ -38,7 +38,7 @@ def main() -> None:
         command_argument: list = split_arguments(command)
         if not command_argument:
             print("mysh: syntax error: unterminated quote")
-
+            continue
         command_type: Command = command_factory(command)
         command_type.execute()
 
