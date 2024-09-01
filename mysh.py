@@ -2,20 +2,22 @@ import signal
 import shlex
 import os
 import json
-import re
 import sys
+import re
 
 from Cd import Cd
 from Exit import Exit
 from Pwd import Pwd
 from Which import Which
 from Var import Var
+import Verify
+from ExecuteCommand import ExecuteCommand
 
 # DO NOT REMOVE THIS FUNCTION!
 # This function is required in order to correctly switch the terminal foreground group to
 # that of a child process.
 
-BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "cd", "var"]
+BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "cd", "var", "which"]
 
 
 def setup_signals() -> None:
@@ -25,23 +27,33 @@ def setup_signals() -> None:
     signal.signal(signal.SIGTTOU, signal.SIG_IGN)
 
 
+
 def split_arguments(command: str) -> list:
     try:
         s = shlex.shlex(command, posix=True)
         s.escapedquotes = "'\""
         s.whitespace_split = True
-        # new_list = [item.replace("'", '"') for item in list(s)]
-        # print(new_list)
         return list(s)
     except ValueError:
         return []
-    
+def shell_variable(command):
+    pattern_detect_variable = r"\\?\$\{(.*?)\}"
 
-def valid_variable_name(variable_name: str) -> bool:
-        pattern = r'^[A-Za-z0-9_]+$'
-        return bool(re.match(pattern, variable_name))
-    
-    
+    def replace_match(match):
+        full_match = match.group(0)
+        variable_name = match.group(1)
+
+        if full_match.startswith('\\$'):
+            return full_match[1:]
+
+        if not Verify.valid_variable_name(variable_name):
+            print(f"mysh: syntax error: invalid characters for variable '{variable_name}'", file=sys.stderr)
+            return full_match
+        return os.environ.get(variable_name, "")
+
+    result = re.sub(pattern_detect_variable, replace_match, command)
+    return result
+
 
 def load_config_file():
     myshdotdir = os.environ.get("MYSHDOTDIR")
@@ -51,7 +63,9 @@ def load_config_file():
         home_dir = os.path.expanduser("~")
         myshrc_path = os.path.join(home_dir, ".myshrc")
     if not os.path.exists(myshrc_path):
+        # case we cant find the file, continuing like default
         return
+    
     try:
         with open(myshrc_path, "r") as file:
             env_variables = json.load(file)
@@ -63,19 +77,25 @@ def load_config_file():
         if not isinstance(value, str):
             print(f"mysh: .myshrc: {key}: not a string", file=sys.stderr)
             continue
-        elif not valid_variable_name(key):
+        elif not Verify.valid_variable_name(key):
             print(f"mysh: .myshrc: {key}: invalid characters for variable name", file=sys.stderr)
             continue
-        os.environ[key] = os.path.expandvars(value)
+        # print(key, value)
+        os.environ[key] = shell_variable(os.path.expandvars(value))
 
+
+    
 
 def main() -> None:
     # DO NOT REMOVE THIS FUNCTION CALL!
     setup_signals()
+    os.environ["PROMPT"] = ">> "
+    os.environ["MYSH_VERSION"] = "1.0"
     load_config_file()
     while True:
         try:
-            command = input(">> ")
+            prompt = os.environ.get("PROMPT")
+            command = input(f"{prompt}")
         except EOFError:
             print()
             break
@@ -100,20 +120,13 @@ def main() -> None:
             var_command = Var(command_argument)
             var_command.execute()
         elif command_argument[0] == "which":
-            which_command = Which(BUILTIN_COMMANDS, command_argument)
+            which_command = Which(command_argument)
             which_command.execute()
         else:
-            rside, wside = os.pipe()
-            if not os.fork():
-                os.close(rside)
-                os.dup2(wside, 1)
-                os.execve("/bin/bash", ["/bin/bash", "-c", command], os.environ)
-            os.close(wside)
-            pyrside = os.fdopen(rside)
-            lines = pyrside.readlines()
-            for line in lines:
-                print(line, end="")
+            execute_command = ExecuteCommand(command)
+            execute_command.execute()
 
 
 if __name__ == "__main__":
     main()
+

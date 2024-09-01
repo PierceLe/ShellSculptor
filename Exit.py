@@ -15,11 +15,11 @@ class Exit(Command):
 
     def execute(self):
         if len(self._argument) == 1:
-            exit()
+            exit(0)
         elif len(self._argument) == 2:
             exit_code = self._argument[1]
             if valid_code(exit_code):
-                exit()
+                exit(int(exit_code))
             else:
                 print(f"exit: non-integer exit code provided: {self._argument[1]}", file=sys.stderr)
         elif len(self._argument) > 2:

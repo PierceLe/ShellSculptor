@@ -85,3 +85,4 @@ def split_by_pipe_op(cmd_str: str) -> list[str]:
 
     # Return string list
     return split_str
+

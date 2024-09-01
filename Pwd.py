@@ -2,7 +2,6 @@ import os
 import sys
 from Command import Command
 
-
 def invalid_option(options: list) -> str:
     for option in options:
         if option != "P":
@@ -13,8 +12,7 @@ def invalid_option(options: list) -> str:
 class Pwd(Command):
     def execute(self):
         if len(self._argument) == 1:
-            print(os.getcwd())
-            pass
+            print(os.environ['PWD'])
             # execute pwd Command
         elif len(self._argument) >= 2:
             if self._argument[1].startswith("-"):
