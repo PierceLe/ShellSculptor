@@ -12,6 +12,7 @@ Functions:
 
 
 import parsing
+import validate
 from mysh_command import Command
 from cd_command import Cd
 from exit_command import Exit
@@ -43,14 +44,14 @@ def command_factory(command: str) -> Command:
         command_obj.execute()  # Executes the 'cd' command
     """
     command_argument: list = parsing.split_arguments(command)
+    if command_argument[0] == "var":
+        return Var(command)
+    if "|" in command or not validate.is_builtin_command(command_argument[0]):
+        return ExecuteCommand(command)
     if command_argument[0] == "exit":
         return Exit(command)
     if command_argument[0] == "pwd":
         return Pwd(command)
     if command_argument[0] == "cd":
         return Cd(command)
-    if command_argument[0] == "var":
-        return Var(command)
-    if command_argument[0] == "which":
-        return Which(command)
-    return ExecuteCommand(command)
+    return Which(command)

@@ -13,8 +13,11 @@ Classes:
 
 import sys
 import os
+
+import validate
 from which_command import Which
 from mysh_command import Command
+import choose_command as built_in_commands
 from parsing import split_by_pipe_op, solving_shell_variable, split_arguments
 
 
@@ -68,13 +71,12 @@ class ExecuteCommand(Command):
         prev_fd = None
 
         for i, command in enumerate(commands):
-            command_argument = split_arguments(command)
             rside, wside = self._setup_pipes(i, len(commands))
 
             pid = os.fork()
             if pid == 0:  # Child process
                 self._setup_child_process(prev_fd, wside)
-                self._execute_command(command_argument)
+                self._execute_command(command)
             else:  # Parent process
                 prev_fd = self._handle_parent_process(pid, prev_fd, rside, wside)
 
@@ -100,8 +102,9 @@ class ExecuteCommand(Command):
             os.dup2(wside, 1)
             os.close(wside)
 
-    def _execute_command(self, command_argument):
+    def _execute_command(self, command):
         """Execute the actual command, handling file existence and permissions."""
+        command_argument = split_arguments(command)
         executable_command = command_argument[0]
 
         if os.path.isfile(executable_command):
@@ -109,6 +112,10 @@ class ExecuteCommand(Command):
                 print(f"mysh: permission denied: {executable_command}", file=sys.stderr)
                 sys.exit()
             executable_path = executable_command
+
+        elif validate.is_builtin_command(executable_command):
+            built_in_commands.command_factory(command).execute()
+            sys.exit()
         else:
             executable_path = self._find_executable_path(executable_command)
 

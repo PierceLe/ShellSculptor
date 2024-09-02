@@ -11,6 +11,8 @@ Functions:
 
 import re
 
+BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "var", "which"]
+
 
 def valid_variable_name(variable_name: str) -> bool:
     """
@@ -78,3 +80,10 @@ def invalid_option_pwd(options: list) -> str:
         if option != "P":
             return option
     return ""
+
+
+def is_builtin_command(command: str) -> bool:
+    """
+    Checks if the given command is a builtin command.
+    """
+    return command in BUILTIN_COMMANDS
