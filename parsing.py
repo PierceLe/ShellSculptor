@@ -1,5 +1,25 @@
 """
-Module to handle parsing for the shell.
+parsing.py
+
+This module preprocesses user input in mysh shell before it is executed by `mysh_command`.
+This module will have function to split commands by pipe operators, resolving shell variables,
+which are saved into environment variables, and splitting a line into arguments using shlex.
+
+Functions:
+    - split_by_pipe_op(cmd_str): Splits a piping command into subcommands.
+      This function returns a list of strings where each element is a subcommand of piping.
+    - solving_shell_variable(command): Resolves shell variables in a command string,
+      substituting them with their corresponding values from the environment.
+      Returns the final command or False if the variable name is not valid using
+      `valid_variable_name` function in validate module.
+    - split_arguments(command): Splits a command string into a list of arguments,
+      handling quotes and whitespace appropriately. Returns a list of split arguments
+      or an empty list if an error occurs.
+
+Internal Functions:
+    - _substitute_variable(full_match, variable_name): Substitutes a shell variable
+      with its value from the environment. Returns the substituted string
+      and a boolean indicating whether an error occurred.
 """
 import os
 import sys
@@ -52,10 +72,10 @@ def split_by_pipe_op(cmd_str: str) -> list[str]:
     ['a', "b '| c' ", ' ']
 
     Args:
-        cmd_str: The command string we wish to split on the unquoted pipe operator ('|').
+        cmd_str: The piping command.
 
     Returns:
-        A list of strings that was split on the unquoted pipe operator.
+        A list of subcommand.
     """
     # If you'd like, you're free to modify this function as you need.
 
@@ -94,11 +114,13 @@ def split_by_pipe_op(cmd_str: str) -> list[str]:
 
 def solving_shell_variable(command: str) -> Union[bool, str]:
     """
-    Resolves shell variables in a command string.
+    Resolves shell variables in a command string by substituting them with their
+    corresponding values from the environment.
 
-    This function identifies and substitutes shell variables in the given command
-    string with their corresponding values from the environment. If a variable
-    name is invalid, an error message is printed, and the function returns `False`.
+    This function identifies shell variables in the given command string using a
+    regex pattern. For each identified variable, it attempts to substitute the
+    variable with its value from the environment. If a variable name is invalid,
+    an error message is printed, and the function returns `False`.
 
     Args:
         command (str): The command string containing shell variables to resolve.
@@ -107,31 +129,51 @@ def solving_shell_variable(command: str) -> Union[bool, str]:
         Union[bool, str]: The command string with resolved variables, or `False`
         if a syntax error occurred due to invalid variable names.
     """
-    pattern_detect_variable = r"\\?\$\{(.*?)\}"
+    pattern = r"\\?\$\{(.*?)\}" # the pattern that match with shell variable
+    error_occurred = False # boolean to check that the error occur or not
 
-    # Variable to check if a syntax error occurs
-    error_occurred = False
-
-    def get_variable_value(match):
-        nonlocal error_occurred
+    matches = re.finditer(pattern, command)
+    for match in matches:
         full_match = match.group(0)
         variable_name = match.group(1)
-        if full_match.startswith('\\$'):
-            return full_match[1:]
-        if not validate.valid_variable_name(variable_name):
-            print(
-                f"mysh: syntax error: invalid characters for variable {variable_name}",
-                file=sys.stderr
-            )
-            error_occurred = True
-            return ""
-        return os.environ.get(variable_name, "")
+        replacement, error_occurred = _substitute_variable(full_match, variable_name)
+        command = command.replace(full_match, replacement)
 
-    result = re.sub(pattern_detect_variable, get_variable_value, command)
+    return command if not error_occurred else False
 
-    if error_occurred:
-        return False
-    return result
+
+def _substitute_variable(full_match: str, variable_name: str) -> tuple[str, bool]:
+    """
+    Substitutes a shell variable with its corresponding value from the environment.
+
+    This function checks if the given shell variable is valid and not escaped.
+    If the variable is valid, it retrieves its value from the environment and
+    returns it along with a `False` flag indicating no error. If the variable
+    is invalid or escaped, it returns an appropriate response and a `True` flag
+    indicating that an error occurred.
+
+    Args:
+        full_match (str): The full string that matched the regex pattern,
+                          including the shell variable.
+        variable_name (str): The extracted name of the variable to be substituted.
+
+    Returns:
+        tuple[str, bool]: A tuple containing:
+            - The substituted string (or an empty string if an error occurred).
+            - A boolean indicating whether an error occurred (`True` if there
+              was an error, `False` otherwise).
+    """
+    if full_match.startswith('\\$'):
+        return full_match[1:], False
+
+    if not variable_name or not validate.valid_variable_name(variable_name):
+        print(
+            f"mysh: syntax error: invalid characters for variable {variable_name}",
+            file=sys.stderr
+        )
+        return "", True
+
+    return os.environ.get(variable_name, ""), False
 
 
 def split_arguments(command: str) -> list:
