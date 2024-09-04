@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TEST_DIR_PATH=~/tests
-PROGRAM_PATH=~/mysh.py
+TEST_DIR_PATH=~/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+PROGRAM_PATH=~/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/mysh.py
 
 # Colors
 RED='\033[0;31m'
