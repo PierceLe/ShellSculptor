@@ -14,6 +14,7 @@ Functions:
 
 import signal
 import os
+import sys
 
 from mysh_command import Command
 from configure_mysh import load_config_file
@@ -46,17 +47,26 @@ def main() -> None:
     """
     setup_signals()
     load_config_file()
+    test_mode = "--runtest" in sys.argv
+
+    # Set prompt behavior based on test mode
+    show_prompt = not test_mode
+
     while True:
         try:
             prompt = os.environ.get("PROMPT")
-            command = input(f"{prompt}")
+            if show_prompt:
+                command = input(f"{prompt}")
+            else:
+                command = input()
+                print(f"{prompt}{command}", flush=True)
         except EOFError:
             print()
             break
         except KeyboardInterrupt:
             print()
             continue
-        if command == "":
+        if command.strip() == "":
             continue
         command_argument: list = split_arguments(command)
         if not command_argument:
