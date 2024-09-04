@@ -2,43 +2,54 @@
 TEST_DIR_PATH=~/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
 PROGRAM_PATH=~/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/mysh.py
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m'
-TEST_NUMBER=1
+# Color codes
+RED='\033[0;31m'   # Red for incorrect output (.actual)
+GREEN='\033[0;32m' # Green for missing correct output (.out)
+WHITE='\033[0;37m'  # White for neutral terminal output
+NC='\033[0m'  # No color
 
+# Find total test cases
+TOTAL_TESTS=$(find "$TEST_DIR_PATH" -type f -name "*.in" | wc -l | tr -d ' ')
+CURRENT_TEST=1
+PASSED_TESTS=0
+
+# Run tests
 for test_folder in "$TEST_DIR_PATH"/*/; do
-    folder_name=$(basename "$test_folder")
-    echo "Start running tests in $folder_name folder"
-
-    # Loop over each .in file in the test folder
+    folder_name=$(basename "$test_folder" | sed -e 's/_/ /g' -e 's/\b\(.\)/\u\1/g')
     for test_input_file in "$test_folder"/*.in; do
-        echo "Start running test $TEST_NUMBER"
+        file_name=$(basename "$test_input_file" .in | sed -e 's/_/ /g' -e 's/\b\(.\)/\u\1/g')
 
-        # Define the paths for the output files
-        expected_output_file="${test_input_file%.in}.out"  # Expected output file
-        actual_output_file="${test_input_file%.in}.actual" # Actual output file
+        echo -ne "${WHITE}Test $CURRENT_TEST: [$folder_name]: $file_name ...${NC}"
 
-        # Run the commands in the .in file by feeding them to mysh.py and append output
-        # Ensure --runtest flag is used to properly format output in test mode
-        python3 $PROGRAM_PATH --runtest < "$test_input_file" > "$actual_output_file"
+        # Define paths for expected and actual outputs
+        expected_output_file="${test_input_file%.in}.out"
+        actual_output_file="${test_input_file%.in}.actual"
+
+        # Run the program and capture the output
+        python3 "$PROGRAM_PATH" --runtest < "$test_input_file" > "$actual_output_file"
 
         # Compare the actual output with the expected output
         if diff -q "$actual_output_file" "$expected_output_file" > /dev/null; then
-            echo "[PASS] Test $TEST_NUMBER"
+            echo -e " ${GREEN}v${NC}"
+            PASSED_TESTS=$((PASSED_TESTS + 1))
         else
-            echo "[FAIL] Test $TEST_NUMBER"
-            echo "DIFF"
-            diff -u "$expected_output_file" "$actual_output_file" | \
-                        grep -vE '^(---|\+\+\+|@@)' | sed -n '/echo/,$p' | awk \
-                        -v red="$RED" -v green="$GREEN" -v nc="$NC" \
-                        '{
-                            if ($1 ~ /^-/) {print red $0 nc}
-                            else if ($1 ~ /^\+/) {print green $0 nc}
-                            else {print $0}
-                        }'
+            echo -e " ${RED}X${NC}"
+            echo -e "${WHITE}Differences:${NC}"
+
+            # Show differences in color, green for missing lines and red for incorrect lines
+            diff -u "$expected_output_file" "$actual_output_file" | grep -vE '^(---|\+\+\+|@@)' | \
+            awk -v red="$RED" -v green="$GREEN" -v nc="$NC" \
+                '{if ($1 ~ /^-/) {sub(/^./, "+", $0); print green $0 nc} else if ($1 ~ /^\+/) {sub(/^./, "-", $0); print red $0 nc}}'
         fi
 
-        TEST_NUMBER=$(expr $TEST_NUMBER + 1)
+        CURRENT_TEST=$((CURRENT_TEST + 1))
     done
 done
+
+
+# Summary
+if [ "$PASSED_TESTS" -eq "$TOTAL_TESTS" ]; then
+    echo -e "${GREEN}Test completed: $PASSED_TESTS/$TOTAL_TESTS${NC}"
+else
+    echo -e "${RED}Test completed: $PASSED_TESTS/$TOTAL_TESTS${NC}"
+fi
