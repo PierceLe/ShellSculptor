@@ -1,25 +1,25 @@
 """
 parsing.py
 
-This module preprocesses user input in mysh shell before it is executed by `mysh_command`.
-This module will have function to split commands by pipe operators, resolving shell variables,
+Preprocesses input in mysh shell before it is executed by `mysh_command`.
+Have functionalities to split commands by pipe operators, resolving shell variables,
 which are saved into environment variables, and splitting a line into arguments using shlex.
 
 Functions:
     - split_by_pipe_op(cmd_str): Splits a piping command into subcommands.
-      This function returns a list of strings where each element is a subcommand of piping.
+      Returns a list of strings where each element is a piping subcommand.
     - solving_shell_variable(command): Resolves shell variables in a command string,
-      substituting them with their corresponding values from the environment.
+      substituting them with orresponding values from the environment.
       Returns the final command or False if the variable name is not valid using
       `valid_variable_name` function in validate module.
     - split_arguments(command): Splits a command string into a list of arguments,
-      handling quotes and whitespace appropriately. Returns a list of split arguments
-      or an empty list if an error occurs.
+      handling quotes and whitespace. Returns a list of split arguments, 
+      an empty list if an error occurs.
 
 Internal Functions:
     - _substitute_variable(full_match, variable_name): Substitutes a shell variable
       with its value from the environment. Returns the substituted string
-      and a boolean indicating whether an error occurred.
+      and a boolean representing whether an error occurred.
 """
 import os
 import sys
@@ -115,19 +115,21 @@ def split_by_pipe_op(cmd_str: str) -> list[str]:
 def solving_shell_variable(command: str) -> Union[bool, str]:
     """
     Resolves shell variables in a command string by substituting them with their
-    corresponding values from the environment.
+    corresponding values.
 
-    This function identifies shell variables in the given command string using a
-    regex pattern. For each identified variable, it attempts to substitute the
-    variable with its value from the environment. If a variable name is invalid,
-    an error message is printed, and the function returns `False`.
+    Identifies shell variables in the given command string using a
+    regex pattern. 
+    
+    For each identified variable, attempts to substitute the variable 
+    with its value from the environment. If a variable name is invalid,
+    an error message is printed, and returns `False`.
 
     Args:
-        command (str): The command string containing shell variables to resolve.
+        command (str): Command string containing shell variables to resolve.
 
     Returns:
-        Union[bool, str]: The command string with resolved variables, or `False`
-        if a syntax error occurred due to invalid variable names.
+        Union[bool, str]: Command string with resolved variables, or `False`
+        if a syntax error occurred (invalid variable names).
     """
     pattern = r"\\?\$\{(.*?)\}" # the pattern that match with shell variable
     error_occurred = False # boolean to check that the error occur or not
@@ -144,24 +146,23 @@ def solving_shell_variable(command: str) -> Union[bool, str]:
 
 def _substitute_variable(full_match: str, variable_name: str) -> tuple[str, bool]:
     """
-    Substitutes a shell variable with its corresponding value from the environment.
+    Substitutes a shell variable with its corresponding value.
 
-    This function checks if the given shell variable is valid and not escaped.
-    If the variable is valid, it retrieves its value from the environment and
-    returns it along with a `False` flag indicating no error. If the variable
-    is invalid or escaped, it returns an appropriate response and a `True` flag
-    indicating that an error occurred.
+    Checks if the given variable is valid and not escaped. If valid,
+    retrieves value from the enviroment and returns along a 'False' flag
+    indicating no error. If invalid or escaped, return an appropriate response
+    and a 'True' flag indicating that an error occurred.
 
     Args:
-        full_match (str): The full string that matched the regex pattern,
+        full_match (str): The complete string that matched the regex pattern,
                           including the shell variable.
         variable_name (str): The extracted name of the variable to be substituted.
 
     Returns:
         tuple[str, bool]: A tuple containing:
-            - The substituted string (or an empty string if an error occurred).
-            - A boolean indicating whether an error occurred (`True` if there
-              was an error, `False` otherwise).
+            - The substituted string (empty string if an error occurred).
+            - A boolean representing whether an error occurred (`True` for 
+            an error, `False` otherwise).
     """
     if full_match.startswith('\\$'):
         return full_match[1:], False
@@ -179,18 +180,18 @@ def _substitute_variable(full_match: str, variable_name: str) -> tuple[str, bool
 def split_arguments(command: str) -> list:
     """
     Splits a command string into a list of arguments, handling quotes and
-    whitespace appropriately.
+    whitespace.
 
     This function uses the `shlex` module to split the input command string
     into a list of arguments, respecting quoted strings and escaping rules.
-    It also expands user home directories if the argument starts with `~`.
+    Expands user home directories if the argument starts with `~`.
 
     Args:
-        command (str): The command string to be split into arguments.
+        command (str): The command string to split.
 
     Returns:
         list: A list of strings representing the split arguments.
-        If a `ValueError` occurs during splitting, an empty list is returned.
+        If a `ValueError` occurs, an empty list is returned.
     """
     try:
         s = shlex.shlex(command, posix=True)

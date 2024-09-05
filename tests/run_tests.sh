@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TEST_DIR_PATH=~/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
-PROGRAM_PATH=~/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/mysh.py
+TEST_DIR_PATH=~/tests
+PROGRAM_PATH=~/mysh.py
 
 # Colors
 RED='\033[0;31m'
@@ -29,14 +29,21 @@ print_diff() {
     awk -v red="$RED" -v green="$GREEN" -v nc="$NC" \
         '{if ($1 ~ /^-/) {sub(/^./, "+", $0); print green $0 nc} else if ($1 ~ /^\+/) {sub(/^./, "-", $0); print red $0 nc}}'
 
+    echo "                                            "
+    echo "                                            "
+
     echo -e "${WHITE}EXPECTED:${NC}"
     while IFS= read -r line; do
-        echo -e "${WHITE}$line${NC}"
+        echo -e "${GREEN}$line${NC}"
     done < "$1"
+    
 
+    echo "                                            "
+    echo "                                            "
+    
     echo -e "${WHITE}ACTUAL:${NC}"
     while IFS= read -r line; do
-        echo -e "${WHITE}$line${NC}"
+        echo -e "${RED}$line${NC}"
     done < "$2"
 }
 
@@ -55,7 +62,7 @@ for test_folder in "$TEST_DIR_PATH"/*/; do
         actual_output_file="${test_input_file%.in}.actual"
 
         # Run the program and capture the output
-        python3 "$PROGRAM_PATH" --runtest < "$test_input_file" > "$actual_output_file"
+        python3 "$PROGRAM_PATH" --runtest < "$test_input_file" &> "$actual_output_file"
 
         # Compare outputs
         if diff -q "$actual_output_file" "$expected_output_file" > /dev/null; then

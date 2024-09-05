@@ -2,13 +2,13 @@
 execute_command.py
 
 This module defines the `ExecuteCommand` class, which is responsible for
-executing shell commands in the shell environment. It handles both
+executing commands in the shell environment. It handles both
 single commands and piped commands, managing process creation and
-execution while handling errors and permissions.
+execution as well as errors and permissions.
 
 Classes:
-    - ExecuteCommand: A command class that executes shell commands, with support
-      for piping and variable substitution.
+    - ExecuteCommand: Executes shell commands, supports piping and 
+    variable substitution.
 """
 
 import sys
@@ -23,27 +23,24 @@ from parsing import split_by_pipe_op, solving_shell_variable, split_arguments
 
 class ExecuteCommand(Command):
     """
-    A command class that executes shell commands.
+    Executes shell commands.
 
-    The `ExecuteCommand` class is designed to handle the execution of shell
-    commands. It supports commands with pipes, handles shell variable
-    substitution, and manages process creation and execution, ensuring that
-    errors and permissions are properly managed.
+    Handles executing shell commands. Supports commands with pipes, handles
+    shell variable substitution. Also manages process creation and execution,
+    handling errors and permissions properly.
     """
-
     def execute(self):
         """
         Executes the shell command.
 
-        This method processes the command string, handling shell variable
-        substitution, command splitting (for pipes), and the execution of
-        individual commands. If the command contains pipes, it sets up the
-        necessary pipes and forks child processes to execute each command
-        in the pipeline. It also manages permissions, checking if a command
-        is executable and handling any errors that occur.
+        Processes the command string, handling shell variable substitution,
+        command splitting for pipes and execution of individual commands.
+        if the command has pipes, sets up the necessary pipes and forks child sub-processes
+        to execute each command in the pipeline. Also manages permissions, executability and
+        hadles errors.
 
         Raises:
-            SystemExit: Exits the shell if a command is not found or cannot be executed.
+            SystemExit: Exits shell if a command is not found or can't be executed.
         """
         if not solving_shell_variable(self._command):
             return
@@ -55,7 +52,7 @@ class ExecuteCommand(Command):
         self._execute_commands(commands)
 
     def _prepare_commands(self):
-        """Prepare the commands for execution by splitting pipes and handling errors."""
+        """Prepare commands by splitting pipes and handling errors."""
         if '|' in self._command:
             commands = split_by_pipe_op(self._command)
             if any(not command.strip() for command in commands):
@@ -103,7 +100,7 @@ class ExecuteCommand(Command):
             os.close(wside)
 
     def _execute_command(self, command):
-        """Execute the actual command, handling file existence and permissions."""
+        """Execute the command, handling file existence and permissions."""
         command_argument = split_arguments(command)
         executable_command = command_argument[0]
 
@@ -122,7 +119,7 @@ class ExecuteCommand(Command):
         os.execve(executable_path, command_argument, os.environ)
 
     def _find_executable_path(self, executable_command):
-        """Find the executable path using the 'which' command or exit if not found."""
+        """Find the executable path via the 'which' command or exit if not found."""
         which_command = Which(f"which {executable_command}")
         executable_path = which_command.execute_file(executable_command)
         if executable_path == f"{executable_command} not found":

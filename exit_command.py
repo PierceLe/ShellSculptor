@@ -1,13 +1,12 @@
 """
 exit_command.py
 
-This module defines the `Exit` command class, which is responsible for
-terminating the shell process with an optional exit code.
+Defines the "Exit" command class, responsinle for terminating the shell
+process with optional exit codes.
 
 Classes:
-    - Exit: A command class that exits the shell with a given exit code.
+    - Exit: Exits the shell with a given exit code.
 """
-
 
 import sys
 import validate
@@ -18,22 +17,23 @@ from mysh_command import Command
 
 class Exit(Command):
     """
-    A command class that exits the shell process.
+    Exits the shell process.
 
-    The `Exit` class provides functionality to terminate the shell with an
-    optional exit code. If no exit code is provided, the default exit code is 0.
+    Provides functionality to terminate the shell with an optional exit code.
+    If no code is given, the default is 0.
+
     """
     def execute(self):
         """
         Executes the `exit` command.
 
-        This method checks the arguments provided with the `exit` command:
-        - If no arguments are provided, it exits the shell with code 0.
-        - If one argument is provided, it checks if the argument is a valid
-          integer and exits with that code. If the argument is not an integer,
-          it prints an error message.
-        - If more than one argument is provided, it prints an error message
-          indicating that too many arguments were given.
+        Checks the arguments provided with the `exit` command:
+        - No arguments are provided -> exit with code 0.
+        - One argument is provided -> checks if the argument is a valid
+          integer, exits with that code. If not an integer, prints an 
+          error message.
+        - More than one argument is provided -> prints an error message
+          complaining that too many arguments were given.
 
         Raises:
             SystemExit: When the command is executed with a valid exit code.

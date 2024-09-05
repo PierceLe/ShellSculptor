@@ -1,10 +1,9 @@
 """
 command.py
 
-This module defines the abstract base class `Command`, which serves as a
-blueprint for creating shell command classes. The `Command` class stores a
-command string and requires subclasses to implement the `execute` method,
-which defines the behavior of the command when it is executed.
+Defines the abstract base class 'Command', serves as a blueprint for the creation
+of shell command classes. Stores a command string and require subclasses to implement
+a 'execute' method which defines behavior of the command when executed.
 
 Classes:
     - Command: An abstract base class for defining and executing shell commands.
@@ -18,28 +17,27 @@ class Command(ABC):
     """
     An abstract base class for defining shell commands.
 
-    This class serves as a blueprint for creating various shell commands.
-    It requires the implementation of the `execute` method in any subclass
-    that inherits from this class. The `Command` class stores the command
-    string and provides a property to access it.
+    A blueprint for creating shell commands. Requires the implementation of
+    the 'execute' method in any subclass that inherits from it. The class stores
+    the command string and provides a property for access.
 
     Args:
-        command (str): The command string to be stored and executed by the subclass.
+        command (str): The command string to be stored and executed by subclasses.
 
     Attributes:
-        _command (str): A protected attribute that holds the command string.
+        _command (str): A protected attribute, holds the command string.
 
     Methods:
-        get_command: A property that returns the stored command string.
-        execute: An abstract method that must be implemented by subclasses
-                 to define the execution logic of the command.
+        get_command: Returns the stored command string.
+        execute: An abstract method that must be implemented by subclasses,
+                 define the execution logic of the command.
     """
     def __init__(self, command: str):
         """
-        Initializes the Command object with the provided command string.
+        Initializes the Command object with the command string.
 
         Args:
-            command (str): The command string to be stored in the object.
+            command (str): The command string to be stored.
         """
         self._command = command
 
@@ -59,7 +57,7 @@ class Command(ABC):
         Executes the command.
 
         This method must be implemented by subclasses to define the specific
-        behavior of the command when it is executed.
+        behavior when it is executed.
 
         Raises:
             NotImplementedError: If the method is not implemented in the subclass.

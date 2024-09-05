@@ -19,28 +19,25 @@ import parsing
 
 def load_config_file():
     """
-    Loads and applies configuration settings from the `.myshrc` file.
+    Loads and applies settings from the `.myshrc` file.
 
-    This function checks for the existence of a `.myshrc` file in the
-    `MYSHDOTDIR` directory or in the user's home directory. If the file is
-    found, it reads the JSON-formatted environment variables from the file
-    and sets them. If the file is not found, or if an error occurs (e.g.,
-    invalid JSON), the function prints an error message and continues with
-    default settings.
+    Checks for `.myshrc` file in the `MYSHDOTDIR` directory or in the home directory.
+    If the file is found, the function reads the JSON-formatted enviroment variables
+    from the file and sets them. If the file is not found or an error occurs 
+    (example: invalid JSON) then the function prints an error message and continues
+    with default.
 
     Environment variables set:
     - PROMPT: The shell prompt string.
-    - MYSH_VERSION: The version of the shell.
+    - MYSH_VERSION: The shell's version.
 
     Errors handled:
-    - Missing `.myshrc` file: The shell continues with default settings.
-    - Invalid JSON format: An error message is printed, and the shell
-      continues with default settings.
-    - Non-string values or invalid variable names: These are skipped
-      with an error message.
+    - Missing `.myshrc` file: Continues with default settings.
+    - Invalid JSON format: An error message is printed, continues with default settings.
+    - Non-string values or invalid variable names: Skipped with an error message.
 
     Notes:
-    - The shell variables are processed for any shell-specific syntax
+    - The shell variables are processed for shell-specific syntax
       before being set as environment variables.
     """
     os.environ["PROMPT"] = os.environ.get("PROMPT", ">> ")

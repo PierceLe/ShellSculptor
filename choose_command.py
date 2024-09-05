@@ -1,13 +1,13 @@
 """
 choose_command.py
 
-This module provides a factory function for creating command objects
-based on the user's input. The `command_factory` function returns
-an appropriate command object that can be executed.
+Provides a factory function to create command objects based on input provided. 
+Returns an appropriate executable command object.
 
 Functions:
-    - command_factory(command): Returns an instance of a command class
-      corresponding to the input command string.
+    - command_factory(command): return command object responding to the
+    input provided.
+      
 """
 
 
@@ -24,18 +24,17 @@ from executing_commands import ExecuteCommand
 
 def command_factory(command: str) -> Command:
     """
-    Creates and returns the appropriate command object based on the input command string.
+    Creates and returns the command object based on input received.
 
-    The `command_factory` function analyzes the first word of the input command string
-    to determine which command class to instantiate. It returns an instance of the
-    corresponding command class, which can then be executed.
+    The function reads the first word of the command string to determing
+    which class to instantiate. it returns an executable instance of that class.
 
     Args:
-        command (str): The full command string input by the user.
+        command (str): The full command input provided.
 
     Returns:
-        Command: An instance of a subclass of `Command` corresponding to the input command.
-                 For unrecognized commands, an `ExecuteCommand` object is returned to handle
+        Command: An instance of a subclass of `Command` based on input received.
+                 If command is not recognized, an `ExecuteCommand` object is returned to handle
                  general shell commands.
 
     Example:

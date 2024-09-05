@@ -3,7 +3,7 @@ This module provides utility functions for validating shell variable names,
 flags, exit codes, and command options.
 
 Functions:
-- valid_variable_name(variable_name): Validates whether a string is a valid shell variable name.
+- valid_variable_name(variable_name): Validates a string as a valid shell variable name.
 - is_flag(argument): Checks if a string is a valid flag.
 - valid_exit_code(exit_code): Validates whether a given value can be used as an exit code.
 - invalid_option_pwd(options): Identifies invalid options for the `pwd` command.
@@ -16,15 +16,15 @@ BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "var", "which"]
 
 def valid_variable_name(variable_name: str) -> bool:
     """
-    Checks if a given variable name is valid according to shell naming conventions.
+    Checks if variable name is valid according to shell naming conventions.
 
-    A valid variable name can only contain alphanumeric characters and underscores.
+    It can only contain alphanumeric characters and underscores.
 
     Args:
-        variable_name (str): The name of the variable to validate.
+        variable_name (str): The name to validate.
 
     Returns:
-        bool: True if the variable name is valid, False otherwise.
+        bool: True if the name is valid, False otherwise.
     """
     pattern = r'^[A-Za-z0-9_]+$'
     return bool(re.match(pattern, variable_name))
@@ -54,7 +54,7 @@ def valid_exit_code(exit_code) -> bool:
         exit_code: The exit code to validate, which can be any data type.
 
     Returns:
-        bool: True if the exit code can be converted to an integer, False otherwise.
+        bool: True if it can be converted to an integer, False otherwise.
     """
     try:
         int(exit_code)
@@ -74,7 +74,7 @@ def invalid_option_pwd(options: list) -> str:
         options (list): A list of option strings.
 
     Returns:
-        str: The first invalid option found, or an empty string if all options are valid.
+        str: The first invalid option found, empty string if all options are valid.
     """
     for option in options:
         if option != "P":

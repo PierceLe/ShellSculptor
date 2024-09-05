@@ -1,9 +1,9 @@
 """
 pwd_command.py
 
-This module provides the implementation of the Pwd command,
-which prints the current working directory to the console.
-It supports options like `-P` to display the physical directory without symbolic links.
+Provides the implementation of the Pwd command,printing the 
+current working directory to the console. Supports options like 
+`-P` to display the physical directory without symbolic links.
 """
 
 import os
@@ -15,17 +15,19 @@ import parsing
 
 class Pwd(Command):
     """
-    The Pwd class provides functionality to execute the `pwd` command in the shell.
-    It supports printing the current working directory and handling options like `-P`.
+    Provides functionality to execute the `pwd` command in the shell.
+    Supports printing the current working directory and handling options like `-P`.
     """
     def execute(self):
         """
         Executes the `pwd` command based on the provided arguments.
 
-        If no arguments are provided, it prints the current directory stored in
-        the PWD environment variable. If the `-P` option is provided, it prints
-        the physical directory without symbolic links. It handles invalid options
-        and unexpected arguments by printing appropriate error messages.
+        No arguments -> prints the current directory stored in the 
+        PWD environment variable. 
+        
+        `-P` option is provided -> prints the physical directory without 
+        symbolic links. Handles invalid options and unexpected arguments 
+        via printing appropriate error messages.
         """
         argument: list = parsing.split_arguments(self._command)
         if len(argument) == 1:
@@ -38,8 +40,8 @@ class Pwd(Command):
                     print(os.getcwd())
                     # execute command pwd -P
                 else:
-                    print(f"pwd: invalid option: -{validate.invalid_option_pwd(options)}")
+                    print(f"pwd: invalid option: -{validate.invalid_option_pwd(options)}", file=sys.stderr)
             else:
                 print("pwd: not expecting any arguments", file=sys.stderr)
         elif len(argument) > 2:
-            print(f"pwd: invalid option: {argument[2]}")
+            print(f"pwd: invalid option: {argument[2]}", file=sys.stderr)

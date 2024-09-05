@@ -1,8 +1,8 @@
 """
 var_command.py
 
-This module provides the implementation of the Var command,
-which is used to set and manage environment variables in the shell.
+Provides the implementation of the Var command, which is for setting and 
+managing environment variables in the shell.
 """
 
 import os
@@ -14,7 +14,7 @@ import parsing
 
 
 def execute_command_and_capture_output(command: str) -> str:
-    """Execute a command and return its output using ExecuteCommand."""
+    """Execute a command and return its output via ExecuteCommand."""
     execute_command = ExecuteCommand(command)
     rside, wside = os.pipe()
 
@@ -34,9 +34,9 @@ def execute_command_and_capture_output(command: str) -> str:
 
 class Var(Command):
     """
-    The Var class provides functionality to set and manage environment
-    variables in the shell. It supports both simple assignment of
-    variables and executing commands to capture their output into a variable.
+    Provides functionality to set and manage environment variables. Supports 
+    both simple assignment of variables and executing commands to set variables to
+    the outputs.
     """
     def execute(self):
         argument: list = parsing.split_arguments(self._command)
