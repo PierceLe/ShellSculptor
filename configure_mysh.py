@@ -1,13 +1,13 @@
 """
 configure_mysh.py
 
-This module provides functionality to load and apply shell configuration
-settings from a `.myshrc` file. It sets up environment variables for the shell
-based on the content of the configuration file or defaults if the file does not exist.
+Provides the functionalities to load and apply shell config settings from
+a `.myshrc` file. Sets up enviroment variables for the shell based on
+the config file or defaults if file does not exist.
 
 Functions:
-    - load_config_file(): Loads configuration settings from the `.myshrc` file
-      and sets environment variables accordingly.
+    - load_config_file(): Loads settings from the `.myshrc` file
+      and sets environment variables.
 """
 
 import os
@@ -23,7 +23,7 @@ def load_config_file():
 
     Checks for `.myshrc` file in the `MYSHDOTDIR` directory or in the home directory.
     If the file is found, the function reads the JSON-formatted enviroment variables
-    from the file and sets them. If the file is not found or an error occurs 
+    from the file and sets them. If the file is not found or an error occurs
     (example: invalid JSON) then the function prints an error message and continues
     with default.
 

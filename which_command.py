@@ -5,7 +5,6 @@ Provides the implementation of the Which command.
 'Which' is used to locate a command's executable file in the system's PATH.
 """
 
-
 import os
 import sys
 import parsing
@@ -14,12 +13,12 @@ from mysh_command import Command
 BUILTIN_COMMANDS: list = ["cd", "pwd", "exit", "var", "which"]
 
 
-
 class Which(Command):
     """
     Provides methods to locate the executable path
     for a given command using the system's PATH.
     """
+
     def execute_file(self, command: str):
         """
         Provides methods to locate the executable path

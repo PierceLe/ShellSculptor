@@ -40,7 +40,10 @@ class Pwd(Command):
                     print(os.getcwd())
                     # execute command pwd -P
                 else:
-                    print(f"pwd: invalid option: -{validate.invalid_option_pwd(options)}", file=sys.stderr)
+                    print(
+                        f"pwd: invalid option: -{validate.invalid_option_pwd(options)}",
+                        file=sys.stderr
+                    )
             else:
                 print("pwd: not expecting any arguments", file=sys.stderr)
         elif len(argument) > 2:

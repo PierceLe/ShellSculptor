@@ -24,25 +24,28 @@ class Cd(Command):
         """
         Executes the `cd` command.
 
-        This method changes the current working directory based on the
-        provided path. If no path is provided, it defaults to the user's
-        home directory. It updates the `PWD` environment variable to reflect
-        the new working directory.
+        Changes current working directory to the provided path, if none
+        is provided then it defaults to user's home directory. Updates the
+        "PWD" enviroment variable to show the new working directory.
 
-        Handles the following cases:
-        - No arguments: Changes to the home directory.
-        - Too many arguments: Prints an error message.
-        - Path resolution: Expands user directories, handles absolute and
-        relative paths.
-        - Updates the `PWD` environment variable accordingly.
+        Cases:
+        - No arguments: to home directory
+        - Too many arguments: error message
+        - Path resolution: expand user directories, both absolute and
+        relative paths
+        - Updates the "PWD" variable accordingly
 
-        Error Handling:
-        - PermissionError: Prints an error if the user does not have
-        permission to change to the specified directory.
-        - FileNotFoundError: Prints an error if the specified directory
-        does not exist.
-        - NotADirectoryError: Prints an error if the specified path is
-        not a directory.
+
+        Errors:
+        - PermissionError: Prints an error if no permission to access
+        directory.
+        - FileNotFoundError: Prints an error if non-existent directory.
+        - NotADirectoryError: Prints an error if path is not a directory.
+
+        Raises:
+            PermissionError: If no permission to access.
+            FileNotFoundError: If non-existent directory.
+            NotADirectoryError: If path is not a directory.
         """
         argument: list = parsing.split_arguments(self._command)
         if len(argument) == 1:
@@ -52,7 +55,6 @@ class Cd(Command):
             return
         else:
             path = os.path.expanduser(argument[1])
-        
         try:
             resolved_path = os.path.abspath(path)
             os.chdir(resolved_path)

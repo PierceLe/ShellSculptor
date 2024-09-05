@@ -7,7 +7,7 @@ single commands and piped commands, managing process creation and
 execution as well as errors and permissions.
 
 Classes:
-    - ExecuteCommand: Executes shell commands, supports piping and 
+    - ExecuteCommand: Executes shell commands, supports piping and
     variable substitution.
 """
 
@@ -23,11 +23,11 @@ from parsing import split_by_pipe_op, solving_shell_variable, split_arguments
 
 class ExecuteCommand(Command):
     """
-    Executes shell commands.
+        Executes shell commands.
 
-    Handles executing shell commands. Supports commands with pipes, handles
-    shell variable substitution. Also manages process creation and execution,
-    handling errors and permissions properly.
+        Handles executing shell commands. Supports commands with pipes, handles
+        shell variable substitution. Also manages process creation and execution,
+        handling errors and permissions properly.
     """
     def execute(self):
         """

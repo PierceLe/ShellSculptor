@@ -1,5 +1,5 @@
 """
-command.py
+mysh_command.py
 
 Defines the abstract base class 'Command', serves as a blueprint for the creation
 of shell command classes. Stores a command string and require subclasses to implement
