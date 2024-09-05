@@ -1,0 +1,5 @@
+>> cd ~/test_data/PWD_TEST/Hello/How/Are/You
+>> cd ../../../../../../tests
+>> pwd
+/home/tests
+

@@ -1,0 +1,5 @@
+>> cd /root
+cd: permission denied: /root
+>> pwd
+/home/tests
+
