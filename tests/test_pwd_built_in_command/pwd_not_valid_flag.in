@@ -1,0 +1,7 @@
+cd ~/test_data/PWD_TEST
+pwd -fP
+pwd -Pm
+pwd -t -P
+pwd -abcdP
+pwd hi
+pwd -P -P -P

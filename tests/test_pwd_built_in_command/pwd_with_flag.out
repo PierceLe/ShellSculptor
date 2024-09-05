@@ -1,0 +1,6 @@
+>> cd ~/test_data/symbolic_link_detect
+>> pwd -P
+/home/test_data/PWD_TEST/Hello/How/Are/You
+>> pwd -P -P -P
+/home/test_data/PWD_TEST/Hello/How/Are/You
+

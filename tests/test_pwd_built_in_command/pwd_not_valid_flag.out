@@ -1,0 +1,14 @@
+>> cd ~/test_data/PWD_TEST
+>> pwd -fP
+pwd: invalid option: -f
+>> pwd -Pm
+pwd: invalid option: -m
+>> pwd -t -P
+pwd: invalid option: -t
+>> pwd -abcdP
+pwd: invalid option: -a
+>> pwd hi
+pwd: not expecting any arguments
+>> pwd -P -P -P
+/home/test_data/PWD_TEST
+

@@ -1,0 +1,3 @@
+cd ~/test_data/symbolic_link_detect
+pwd -P
+pwd -P -P -P

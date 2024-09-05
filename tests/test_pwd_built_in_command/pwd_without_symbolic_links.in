@@ -1,0 +1,16 @@
+cd ~/test_data/PWD_TEST
+pwd
+cd Hello
+pwd
+cd How
+pwd
+cd Are
+pwd
+cd You
+pwd
+cd ..
+pwd
+cd /
+pwd
+cd ~
+pwd

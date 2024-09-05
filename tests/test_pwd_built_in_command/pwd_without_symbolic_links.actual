@@ -1,0 +1,25 @@
+>> cd ~/test_data/PWD_TEST
+>> pwd
+/home/test_data/PWD_TEST
+>> cd Hello
+>> pwd
+/home/test_data/PWD_TEST/Hello
+>> cd How
+>> pwd
+/home/test_data/PWD_TEST/Hello/How
+>> cd Are
+>> pwd
+/home/test_data/PWD_TEST/Hello/How/Are
+>> cd You
+>> pwd
+/home/test_data/PWD_TEST/Hello/How/Are/You
+>> cd ..
+>> pwd
+/home/test_data/PWD_TEST/Hello/How/Are
+>> cd /
+>> pwd
+/
+>> cd ~
+>> pwd
+/home
+
