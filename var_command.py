@@ -45,7 +45,6 @@ class Var(Command):
             return
 
         if validate.is_flag(argument[1]):
-            valid_flag = '-s'
             for flag in argument[1][1:]:
                 if flag != 's':
                     print(f"var: invalid option: -{flag}")
