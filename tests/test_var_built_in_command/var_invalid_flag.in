@@ -1,0 +1,6 @@
+var -f hi hello
+var -su hi "echo hello"
+var hi
+var hi hello hahahaha
+var
+var -s hi

@@ -1,0 +1,10 @@
+cd /hahaha
+cd ~/
+pwd
+ls
+var hi hello
+echo ${hi}
+which cd
+which echo
+which echo cd var | cat | grep "/usr"
+exit

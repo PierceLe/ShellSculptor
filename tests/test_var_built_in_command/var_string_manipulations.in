@@ -1,0 +1,6 @@
+var hi hello
+var hi hoho
+echo ${hi}
+var name secret
+var sentence "${hi} ${name}"
+echo ${sentence}

@@ -1,0 +1,7 @@
+echo "Testing is so boring" | cat
+cat ~/test_data/movies.txt | grep "Advengers"
+cat ~/test_data/football.csv | grep "Manchester United"
+cat ~/test_data/football.csv | grep "2-2" | wc -l
+cat ~/test_data/football.csv | grep "0-" | awk -F',' '{print $1}'
+cat ~/test_data/football.csv | sort -t',' -k2
+cat ~/test_data/football.csv | awk -F',' '{print $2}'

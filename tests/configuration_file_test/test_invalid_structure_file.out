@@ -1,0 +1,3 @@
+>> var MYSHDOTDIR ~/test_data/invalid_config_file
+mysh: invalid JSON format for .myshrc
+

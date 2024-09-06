@@ -1,0 +1,32 @@
+>> cd /hahaha
+cd: no such file or directory: /hahaha
+>> cd ~/
+>> pwd
+/home
+>> ls
+cd_command.py
+choose_command.py
+configure_mysh.py
+executing_commands.py
+exit_command.py
+mysh_command.py
+mysh.py
+parsing.py
+pwd_command.py
+__pycache__
+README.md
+test_data
+tests
+validate.py
+var_command.py
+which_command.py
+>> var hi hello
+>> echo ${hi}
+hello
+>> which cd
+cd: shell built-in command
+>> which echo
+/usr/sbin/echo
+>> which echo cd var | cat | grep "/usr"
+/usr/sbin/echo
+>> exit

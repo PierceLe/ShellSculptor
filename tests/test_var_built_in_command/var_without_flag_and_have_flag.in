@@ -1,0 +1,6 @@
+var name secret
+echo ${name}
+var deadline Today
+echo ${deadline}
+var -s final_mark "expr 13 + 3 + 2 + 2"
+echo ${final_mark}

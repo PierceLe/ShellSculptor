@@ -44,7 +44,7 @@ def main() -> None:
     smooth operation.
     """
     setup_signals()
-    load_config_file()
+    # load_config_file()
     test_mode = "--runtest" in sys.argv
 
     # Set prompt behavior based on test mode
@@ -52,6 +52,7 @@ def main() -> None:
 
     while True:
         try:
+            load_config_file()
             prompt = os.environ.get("PROMPT")
             if show_prompt:
                 command = input(f"{prompt}")

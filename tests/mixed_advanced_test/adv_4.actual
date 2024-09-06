@@ -1,0 +1,16 @@
+>> cd ~
+>> ls -a | grep .py
+cd_command.py
+choose_command.py
+configure_mysh.py
+executing_commands.py
+exit_command.py
+mysh_command.py
+mysh.py
+parsing.py
+pwd_command.py
+__pycache__
+validate.py
+var_command.py
+which_command.py
+

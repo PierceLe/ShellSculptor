@@ -1,0 +1,3 @@
+var hi hello
+echo "I want to say ${hi}"
+echo 'I want to say ${hi}'

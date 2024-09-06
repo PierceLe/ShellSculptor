@@ -1,0 +1,14 @@
+>> var MYSHDOTDIR ~/test_data
+myshshell  >> echo ${MYSHDOTDIR}
+/home/test_data
+myshshell  >> echo hi
+hi
+myshshell  >> echo hello
+hello
+myshshell  >> echo ${PROMPT}
+myshshell >>
+myshshell  >> echo ${WORK_DIR}
+/home/
+myshshell  >> echo ${PROJECT_DIR}
+/home/
+

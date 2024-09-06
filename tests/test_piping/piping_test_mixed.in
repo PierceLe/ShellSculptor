@@ -1,0 +1,7 @@
+cd ~/test_data
+cat assignment_data1001.txt | wc -l
+cat assignment_data1001.txt | grep "pets" | head -n 10
+cat assignment_data1001.txt | grep "fish" | sort
+cat assignment_data1001.txt | grep "dogs" | sort -r
+cat assignment_data1001.txt | tr ' ' '\n' | sort | uniq
+cat assignment_data1001.txt | tr ' ' '\n' | sort | uniq -c | sort -nr | head -n 10

@@ -1,0 +1,6 @@
+>> var hi hello
+>> echo "I want to say ${hi}"
+I want to say hello
+>> echo 'I want to say ${hi}'
+I want to say hello
+

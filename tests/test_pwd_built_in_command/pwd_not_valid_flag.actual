@@ -11,4 +11,6 @@ pwd: invalid option: -a
 pwd: not expecting any arguments
 >> pwd -P -P -P
 /home/test_data/PWD_TEST
+>> pwd -P -t
+/home/test_data/PWD_TEST
 

@@ -1,0 +1,40 @@
+>> echo "Testing is so boring" | cat
+Testing is so boring
+>> cat ~/test_data/movies.txt | grep "Advengers"
+2. Advengers: Endgame
+4. Advengers: Infinity wars
+>> cat ~/test_data/football.csv | grep "Manchester United"
+Swansea City,         1-4, 0-2, Manchester United
+>> cat ~/test_data/football.csv | grep "2-2" | wc -l
+1
+>> cat ~/test_data/football.csv | grep "0-" | awk -F',' '{print $1}'
+Norwich City
+Sunderland
+Swansea City
+West Bromwich Albion
+Crystal Palace
+>> cat ~/test_data/football.csv | sort -t',' -k2
+Sunderland,           0-1, 0-0, Fulham
+West Bromwich Albion, 0-1, 0-0, Southampton
+Crystal Palace,       0-1, 0-0, Tottenham Hotspur
+Liverpool,            1-0, 1-0, Stoke City
+Arsenal,              1-3, 1-1, Aston Villa
+Swansea City,         1-4, 0-2, Manchester United
+West Ham United,      2-0, 1-0, Cardiff City
+Chelsea,              2-0, 2-0, Hull City
+Norwich City,         2-2, 0-0, Everton
+Manchester City,      4-0, 2-0, Newcastle United 
+Team1,                FT,  HT,  Team2
+>> cat ~/test_data/football.csv | awk -F',' '{print $2}'
+                FT
+              1-3
+            1-0
+         2-2
+           0-1
+         1-4
+ 0-1
+      2-0
+              2-0
+       0-1
+      4-0
+

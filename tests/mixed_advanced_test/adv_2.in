@@ -1,0 +1,5 @@
+invalid_command
+ls | invalid_command
+cd ~
+pwd
+exit

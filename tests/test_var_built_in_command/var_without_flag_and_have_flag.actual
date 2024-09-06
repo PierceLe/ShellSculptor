@@ -1,0 +1,10 @@
+>> var name secret
+>> echo ${name}
+secret
+>> var deadline Today
+>> echo ${deadline}
+Today
+>> var -s final_mark "expr 13 + 3 + 2 + 2"
+>> echo ${final_mark}
+20
+

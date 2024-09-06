@@ -5,3 +5,4 @@ pwd -t -P
 pwd -abcdP
 pwd hi
 pwd -P -P -P
+pwd -P -t

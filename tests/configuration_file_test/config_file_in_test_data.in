@@ -1,0 +1,7 @@
+var MYSHDOTDIR ~/test_data
+echo ${MYSHDOTDIR}
+echo hi
+echo hello
+echo ${PROMPT}
+echo ${WORK_DIR}
+echo ${PROJECT_DIR}

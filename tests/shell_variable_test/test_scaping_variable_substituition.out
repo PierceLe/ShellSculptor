@@ -1,0 +1,4 @@
+>> var hi "hello"
+>> echo \${hi}
+${hi}
+

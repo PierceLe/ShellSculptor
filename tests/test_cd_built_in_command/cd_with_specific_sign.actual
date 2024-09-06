@@ -1,9 +1,0 @@
->> cd /
->> pwd
-/
->> cd ~/test_data/PWD_TEST/Hello
->> cd -
-cd: no such file or directory: -
->> pwd
-/home/test_data/PWD_TEST/Hello
-

@@ -1,0 +1,3 @@
+cd ~
+var -s student_with_highest_mark  'cat ~/test_data/student_marks.csv | sort -t, -k2,2n | head -n 2'
+echo "${student_with_highest_mark}"

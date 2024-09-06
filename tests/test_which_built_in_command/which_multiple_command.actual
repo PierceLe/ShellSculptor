@@ -1,0 +1,8 @@
+>> which cd ls pwd echo cat haha
+cd: shell built-in command
+/usr/sbin/ls
+pwd: shell built-in command
+/usr/sbin/echo
+/usr/sbin/cat
+haha not found
+

@@ -1,0 +1,14 @@
+>> var -f hi hello
+mysh: command not found: hello
+var: invalid option: -f
+>> var -su hi "echo hello"
+var: invalid option: -u
+>> var hi
+var: expected 2 arguments, got 1
+>> var hi hello hahahaha
+var: expected 2 arguments, got 3
+>> var
+var: expected 2 arguments, got 0
+>> var -s hi
+var: expected 4 arguments, got 2
+

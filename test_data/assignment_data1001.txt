@@ -1,0 +1,27 @@
+
+
+Source
+The data was collected from general public from 26/08/2023 to 12/09/2023, using Google Forms (https://forms.gle/LrTkKyHrVUirfZGW9)
+Structure
+The survey received 112 responses, with diffferent variables being represented in the rows, with columns showing the answer to these variables. We had 11 total questions, with 6 qualitative questions (Gender, type of pets, if money spent was worth it, how often you take pictures of pet, reason for having a pet, disadvantages of pets), and 5 quantitative questions (money spent, satisfaction of pets from 1-10, hours of free time, time spent with pets, and age of the owner). We then organised the data through using the “factor” code to group all the same answers together.
+Limitations
+Data gathered were mainly from students in first year of university, mainly 18-19 years of age. This limits the scopes of opinions that we gathered, since there is very limited data upon the opinions of older citizens.
+Data Clearing
+Certain absurd answers such as ADHD, when asked about the disadvantages of pets, were excluded manually. Response involving more obscured pets such as amphibians, arachnids, or horses were excluded since we want to investigate the relationship between more mainstream and popular type of pets, such as dogs and cats, rather than the more exotic types.
+
+
+From the boxplots, we see that dogs and cats owners will often feel the most satisfaction from their pets. This is demonstrated in the average value of satisfaction of dogs and cats, with cats offering an average satisfaction of ~8.41 and dogs offering an average satisfaction of ~8.37 respectively. Guinea pigs will still offer a certain level of satisfaction with an average of ~6.25. Unfortunately, fish seems to offer the least level of satisfaction with an average of ~3.36.
+
+In summary, the mean satisfaction score of 8.34 indicates that most participants feel highly satisfied with their pets, with 34 individuals giving a perfect rating of 10, signifying immense happiness in their pet companionship, while only 15 respondents rated below 5, demonstrating that a majority of participants genuinely enjoy their time with their pets.
+
+In summary, there is a clear positive correlation in the data, showing that individuals with more free time per week tend to allocate approximately 28.5% of that time to spend with their pets, indicating that participants in the study highly value the time they share with their animal companions.
+The residual plot appears to be random and support the idea that the linear fit is appropriate for the data.
+Conclusion:
+In summary, the data indicates that a majority of participants find pets to be a source of high satisfaction, with dog and cat owners typically reporting higher satisfaction scores, while fish and guinea pig owners tend to report lower scores. However, individual opinions vary, and there are exceptions within each category. Additionally, there is a positive correlation between the time spent with pets and the amount of free time individuals have, suggesting that people are willing to allocate more of their available free time to bond with their pets, emphasizing the value of pet companionship in their lives.
+What are the advantages and disadvantages of each type of pets?
+According to the graph above, fish would be the easiest pet to take care, which has only one type of disadvantages, while the others have multiple issues.
+The main reason for why the owners keep their pet is because of pets cute appearance! While the reason from most fish owners is that fishes benefit their mental health. What comes to the next is many pet owners believe that the company from pet will solve their loneliness. Besides, dogs have all-round advantages compared with other anim
+According to our graph, the median of ratio between time spent and free time of dogs has the highest value, following by cat and guinea. Moreover, we can see that the threshold line is over the rate of 1.0, it means someone define their time for pets as different from free time.
+Conclusion:
+Research Question 2 investigate the advantages and disadvantages of various types of pets based on various responses. The responses shows that fish are the lowest maintenance pet as the owner only have cleaning issues as their concerns. Dogs and cats are cited as a high maintenance pet as it comes with many challenges such as financial issues. The main reason to keep a pet will be due to its cute appearance, while fish are seen to be improving mental health. The report also showed that dogs owner tend to spend more of their free time with their dogs, suggesting a strong commitment to dog care.
+

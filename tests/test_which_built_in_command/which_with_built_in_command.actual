@@ -1,0 +1,11 @@
+>> which which
+which: shell built-in command
+>> which cd
+cd: shell built-in command
+>> which pwd
+pwd: shell built-in command
+>> which var
+var: shell built-in command
+>> which exit
+exit: shell built-in command
+

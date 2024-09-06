@@ -1,0 +1,3 @@
+var hi hello
+var hello hi
+echo "\$${hi} \$${hello}"

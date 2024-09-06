@@ -1,0 +1,8 @@
+>> invalid_command
+mysh: command not found: invalid_command
+>> ls | invalid_command
+mysh: command not found: invalid_command
+>> cd ~
+>> pwd
+/home
+>> exit

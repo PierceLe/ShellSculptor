@@ -26,11 +26,13 @@ print_diff() {
 
     # Show differences in color (green for missing lines and red for incorrect lines)
     diff -u "$1" "$2" | grep -vE '^(---|\+\+\+|@@)' | \
-    awk -v red="$RED" -v green="$GREEN" -v nc="$NC" \
-        '{if ($1 ~ /^-/) {sub(/^./, "+", $0); print green $0 nc} else if ($1 ~ /^\+/) {sub(/^./, "-", $0); print red $0 nc}}'
+    awk -v red="$RED" -v green="$GREEN" -v white="$WHITE" -v nc="$NC" \
+        '{if ($1 ~ /^-/) {sub(/^./, "+", $0); print green $0 nc} else if ($1 ~ /^\+/) {sub(/^./, "-", $0); print red $0 nc} else {
+                print white $0 nc
+            }}'
 
-    echo "                                            "
-    echo "                                            "
+    echo "              "
+    echo "              "
 
     echo -e "${WHITE}EXPECTED:${NC}"
     while IFS= read -r line; do
@@ -38,8 +40,8 @@ print_diff() {
     done < "$1"
     
 
-    echo "                                            "
-    echo "                                            "
+    echo "      "
+    echo "      "
     
     echo -e "${WHITE}ACTUAL:${NC}"
     while IFS= read -r line; do

@@ -1,0 +1,3 @@
+cat ~/test_data/movies.txt
+grep "movies" ~/test_data/movies.txt
+fakecommand

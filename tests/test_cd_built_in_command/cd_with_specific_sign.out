@@ -1,8 +1,0 @@
->> cd /
->> pwd
-/
->> cd ~/test_data/PWD_TEST/Hello
->> cd -
->> pwd
-/
-

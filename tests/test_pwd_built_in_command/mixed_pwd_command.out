@@ -7,4 +7,8 @@
 pwd: invalid option: -f
 >> pwd -f
 pwd: invalid option: -f
+>> pwd -PPPPPPPPPPPPPPPP
+/home/test_data/PWD_TEST/Hello/How/Are/You
+>> pwd -P -P -P -P -P -P
+/home/test_data/PWD_TEST/Hello/How/Are/You
 

@@ -1,0 +1,5 @@
+>> cd /
+>> var -s root "ls"
+>> echo ${root}
+bin boot build course dev etc home lib lib64 mnt opt proc root run sbin services srv sys tmp usr var
+

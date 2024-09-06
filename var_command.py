@@ -45,10 +45,14 @@ class Var(Command):
             return
 
         if validate.is_flag(argument[1]):
-            if argument[1] != "-s":
-                print(f"var: invalid option: {argument[1][: 2]}")
+            valid_flag = '-s'
+            for flag in argument[1][1:]:
+                if flag != 's':
+                    print(f"var: invalid option: -{flag}")
+                    break
+            if len(argument) < 4:
+                print(f"var: expected 4 arguments, got {len(argument) - 1}", file=sys.stderr)
                 return
-
             variable_name = parsing.solving_shell_variable(argument[2])
             if not variable_name:
                 return
