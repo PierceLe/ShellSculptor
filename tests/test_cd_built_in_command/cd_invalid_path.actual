@@ -1,3 +1,1 @@
->> cd ~/hehehehehehehehe
-cd: no such file or directory: /home/hehehehehehehehe
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

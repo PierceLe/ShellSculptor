@@ -1,7 +1,1 @@
->> which my name is "\"SECRET\"" '\'haha\''
-my not found
-name not found
-is not found
-"SECRET" not found
-'haha' not found
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

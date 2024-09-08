@@ -1,3 +1,1 @@
->> echo Starting        writting test for       Assignment 1 INFO1112
-Starting writting test for Assignment 1 INFO1112
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

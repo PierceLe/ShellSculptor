@@ -1,8 +1,1 @@
->> ./dont_have_this_file.sh
-mysh: command not found: ./dont_have_this_file.sh
->> cd ~/test_data/
->> ./file_without_permision.sh
-mysh: permission denied: ./file_without_permision.sh
->> ./file_with_permision.sh
-You have permision to access this file haha
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

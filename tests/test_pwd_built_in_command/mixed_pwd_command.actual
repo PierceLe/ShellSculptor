@@ -1,14 +1,1 @@
->> cd ~/test_data/symbolic_link_detect
->> pwd
-/home/test_data/symbolic_link_detect
->> pwd -P
-/home/test_data/PWD_TEST/Hello/How/Are/You
->> pwd -fP
-pwd: invalid option: -f
->> pwd -f
-pwd: invalid option: -f
->> pwd -PPPPPPPPPPPPPPPP
-pwd: invalid option: -
->> pwd -P -P -P -P -P -P
-/home/test_data/PWD_TEST/Hello/How/Are/You
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

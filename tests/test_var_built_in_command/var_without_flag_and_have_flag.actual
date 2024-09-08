@@ -1,10 +1,1 @@
->> var name secret
->> echo ${name}
-secret
->> var deadline Today
->> echo ${deadline}
-Today
->> var -s final_mark "expr 13 + 3 + 2 + 2"
->> echo ${final_mark}
-20
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

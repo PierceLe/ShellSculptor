@@ -1,6 +1,1 @@
->> which "I want to code" 'with bash' in Assignment\ 1
-I want to code not found
-with bash not found
-in not found
-Assignment 1 not found
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

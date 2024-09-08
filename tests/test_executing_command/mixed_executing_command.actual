@@ -1,14 +1,1 @@
->> cat ~/test_data/movies.txt
-The list belows is the list of my favorite movies I have seen
-1. Deadpool
-2. Advengers: Endgame
-3. Totoro
-4. Advengers: Infinity wars
-5. Mr Robot
-6. Iron man
-7. Minions
->> grep "movies" ~/test_data/movies.txt
-The list belows is the list of my favorite movies I have seen
->> fakecommand
-mysh: command not found: fakecommand
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

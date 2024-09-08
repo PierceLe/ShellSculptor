@@ -1,5 +1,1 @@
->> whoami
-user
->> wc ~/test_data/movies.txt
-  8  32 169 /home/test_data/movies.txt
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

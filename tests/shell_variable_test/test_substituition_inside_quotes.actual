@@ -1,6 +1,1 @@
->> var hi hello
->> echo "I want to say ${hi}"
-I want to say hello
->> echo 'I want to say ${hi}'
-I want to say hello
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

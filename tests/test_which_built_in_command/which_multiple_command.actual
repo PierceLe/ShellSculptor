@@ -1,8 +1,1 @@
->> which cd ls pwd echo cat haha
-cd: shell built-in command
-/usr/sbin/ls
-pwd: shell built-in command
-/usr/sbin/echo
-/usr/sbin/cat
-haha not found
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory

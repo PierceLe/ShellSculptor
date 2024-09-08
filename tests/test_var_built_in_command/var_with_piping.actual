@@ -1,7 +1,1 @@
->> cd ~
->> var -s student_with_highest_mark  'cat ~/test_data/student_marks.csv | sort -t, -k2,2n | head -n 2'
->> echo "${student_with_highest_mark}"
-SID,Mark
-456456456,50
-
-
+python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
