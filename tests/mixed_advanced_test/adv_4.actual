@@ -1,1 +1,9 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> cd ~
+>> ls -a | grep .py
+.ipython
+.jupyter
+.python_history
+.test.py.swo
+.test.py.swp
+test2.py
+

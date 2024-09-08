@@ -1,1 +1,30 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> cd ~/test_data/PWD_TEST
+cd: no such file or directory: /Users/piercele/test_data/PWD_TEST
+>> pwd
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+>> cd Hello
+cd: no such file or directory: Hello
+>> pwd
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+>> cd How
+cd: no such file or directory: How
+>> pwd
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+>> cd Are
+cd: no such file or directory: Are
+>> pwd
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+>> cd You
+cd: no such file or directory: You
+>> pwd
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+>> cd ..
+>> pwd
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor
+>> cd /
+>> pwd
+/
+>> cd ~
+>> pwd
+/Users/piercele
+

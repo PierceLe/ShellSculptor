@@ -1,1 +1,8 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> which cd ls pwd echo cat haha
+cd: shell built-in command
+/bin/ls
+pwd: shell built-in command
+/bin/echo
+/bin/cat
+haha not found
+

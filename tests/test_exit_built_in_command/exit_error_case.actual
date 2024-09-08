@@ -1,1 +1,7 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> exit 1 2 3
+exit: too many arguments
+>> exit 1.5
+exit: non-integer exit code provided: 1.5
+>> exit abc
+exit: non-integer exit code provided: abc
+

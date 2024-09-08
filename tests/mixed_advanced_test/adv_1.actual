@@ -1,1 +1,36 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> cd /hahaha
+cd: no such file or directory: /hahaha
+>> cd ~/
+>> pwd
+/Users/piercele
+>> ls
+BreastCancer-TumorStageAnalysis
+Desktop
+Documents
+Downloads
+GameTank
+Library
+Movies
+Music
+PetDecision-USYD
+Pictures
+Postman
+Public
+Test.java
+Week 5.pdf
+apps
+bin
+miniconda3
+test
+test.sh
+test.txt
+test2.py
+>> var hi hello
+>> echo ${hi}
+hello
+>> which cd
+cd: shell built-in command
+>> which echo
+/bin/echo
+>> which echo cd var | cat | grep "/usr"
+>> exit

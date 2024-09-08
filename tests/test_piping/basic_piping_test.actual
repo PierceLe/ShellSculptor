@@ -1,1 +1,16 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> echo "Testing is so boring" | cat
+Testing is so boring
+>> cat ~/test_data/movies.txt | grep "Advengers"
+cat: /Users/piercele/test_data/movies.txt: No such file or directory
+>> cat ~/test_data/football.csv | grep "Manchester United"
+cat: /Users/piercele/test_data/football.csv: No such file or directory
+>> cat ~/test_data/football.csv | grep "2-2" | wc -l
+cat: /Users/piercele/test_data/football.csv: No such file or directory
+       0
+>> cat ~/test_data/football.csv | grep "0-" | awk -F',' '{print $1}'
+cat: /Users/piercele/test_data/football.csv: No such file or directory
+>> cat ~/test_data/football.csv | sort -t',' -k2
+cat: /Users/piercele/test_data/football.csv: No such file or directory
+>> cat ~/test_data/football.csv | awk -F',' '{print $2}'
+cat: /Users/piercele/test_data/football.csv: No such file or directory
+

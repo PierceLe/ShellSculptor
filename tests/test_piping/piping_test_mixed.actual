@@ -1,1 +1,16 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> cd ~/test_data
+cd: no such file or directory: /Users/piercele/test_data
+>> cat assignment_data1001.txt | wc -l
+cat: assignment_data1001.txt: No such file or directory
+       0
+>> cat assignment_data1001.txt | grep "pets" | head -n 10
+cat: assignment_data1001.txt: No such file or directory
+>> cat assignment_data1001.txt | grep "fish" | sort
+cat: assignment_data1001.txt: No such file or directory
+>> cat assignment_data1001.txt | grep "dogs" | sort -r
+cat: assignment_data1001.txt: No such file or directory
+>> cat assignment_data1001.txt | tr ' ' '\n' | sort | uniq
+cat: assignment_data1001.txt: No such file or directory
+>> cat assignment_data1001.txt | tr ' ' '\n' | sort | uniq -c | sort -nr | head -n 10
+cat: assignment_data1001.txt: No such file or directory
+

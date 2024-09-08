@@ -1,1 +1,17 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> cd ~/test_data/PWD_TEST
+cd: no such file or directory: /Users/piercele/test_data/PWD_TEST
+>> pwd -fP
+pwd: invalid option: -f
+>> pwd -Pm
+pwd: invalid option: -m
+>> pwd -t -P
+pwd: invalid option: -t
+>> pwd -abcdP
+pwd: invalid option: -a
+>> pwd hi
+pwd: not expecting any arguments
+>> pwd -P -P -P
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+>> pwd -P -t
+/Users/piercele/Desktop/year-2/sem1/info1112/ass1/ShellSculptor/tests
+

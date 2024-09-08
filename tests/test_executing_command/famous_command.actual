@@ -1,1 +1,5 @@
-python3: can't open file '/Users/piercele/Desktop/year-2/info1112/ass1/ShellSculptor/mysh.py': [Errno 20] Not a directory
+>> whoami
+piercele
+>> wc ~/test_data/movies.txt
+wc: /Users/piercele/test_data/movies.txt: open: No such file or directory
+
